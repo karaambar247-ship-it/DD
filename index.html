@@ -8,618 +8,211 @@
 <title>DD - Oyun Mağazası</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070a10;color:white;font-family:Arial,sans-serif;min-height:100vh}
+.app{display:flex;min-height:100vh}
+.sidebar{width:260px;min-width:260px;background:#090d15;border-right:1px solid #1b2638;padding:25px 15px;display:flex;flex-direction:column}
+.logo{text-align:center;margin-bottom:45px}
+.logo h1{font-size:65px;font-weight:900;font-style:italic;color:#168fff;text-shadow:0 0 20px #087cff;letter-spacing:4px}
+.logo p{font-size:12px;letter-spacing:4px;color:#c5d9f5;margin-top:5px}
+.menu{display:flex;flex-direction:column;gap:9px}
+.menu button{padding:17px 15px;text-align:left;border:none;color:#aab8cc;background:transparent;border-radius:9px;font-size:15px;cursor:pointer}
+.menu button:hover,.menu button.active{color:white;background:linear-gradient(90deg,#0755b7,#10294c);box-shadow:0 0 15px #006eff33}
+.menu button.active{border-left:4px solid #16c8ff}
+.sidebar-bottom{margin-top:auto;padding:22px 10px;text-align:center;border:1px solid #087cff;border-radius:12px;background:radial-gradient(circle,#102c51,#080d17);color:#83caff;line-height:1.6}
+.main{flex:1;min-width:0;padding:20px}
+.topbar{display:flex;align-items:center;gap:15px;margin-bottom:20px}
+.search{flex:1;padding:14px 18px;background:#101722;border:1px solid #26354b;border-radius:30px;color:white;outline:none;font-size:15px}
+.search:focus{border-color:#168fff}
+.settings{background:transparent;color:#aab8cc;border:none;font-size:23px;cursor:pointer}
+.banner{min-height:220px;border:1px solid #164d91;border-radius:17px;background:radial-gradient(ellipse at 80% 50%,#0758a9 0%,transparent 45%),linear-gradient(110deg,#071426,#101f3b,#030914);display:flex;align-items:center;padding:35px;overflow:hidden;position:relative;margin-bottom:28px}
+.banner:after{content:"🎮";position:absolute;right:35px;font-size:115px;opacity:.8;filter:drop-shadow(0 0 20px #008cff)}
+.banner-content{position:relative;z-index:2}
+.banner h2{font-size:54px;font-style:italic;letter-spacing:5px;text-shadow:0 0 20px #168fff}
+.banner h3{font-size:13px;letter-spacing:7px;color:#9bcfff;margin-bottom:15px}
+.banner p{color:#c4d6ee}
+.section-title{font-size:23px;margin-bottom:17px;border-left:4px solid #12bfff;padding-left:13px}
+.game-card{display:flex;align-items:center;gap:22px;padding:12px;margin-bottom:17px;background:linear-gradient(110deg,#111a29,#0b101a);border:1px solid #25344b;border-radius:15px;transition:.2s}
+.game-card:hover{border-color:#087cff;box-shadow:0 0 18px #087cff22;transform:translateY(-2px)}
+.game-art{width:250px;min-width:250px;height:135px;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.game-art img{width:100%;height:100%;object-fit:cover;display:block}
+.saber-art{background:radial-gradient(circle at 50% 50%,#4c143b,#11172d 65%,#060b17)}
+.second-art{background:linear-gradient(120deg,#063e48,#09233a,#07111c)}
+.game-info{flex:1;min-width:0}
+.game-info h3{font-size:23px;margin-bottom:9px}
+.game-info p{color:#a6b7cc;font-size:14px;line-height:1.5}
+.tags{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.tags span{padding:6px 12px;background:#142b43;color:#83caff;border-radius:20px;font-size:12px}
+.play{min-width:145px;padding:17px;border:1px solid #27bfff;border-radius:11px;color:white;background:linear-gradient(135deg,#087cff,#0045a9);font-size:18px;font-weight:bold;cursor:pointer;box-shadow:0 0 18px #007bff55}
+.play:hover{background:#168fff;box-shadow:0 0 25px #168fff99}
+.updates{margin-top:25px;border:1px solid #273d5b;border-radius:14px;overflow:hidden;background:#0c121e}
+.updates-title{padding:17px;border-bottom:1px solid #273d5b;font-size:17px}
+.update-item{padding:20px;display:flex;align-items:center;gap:17px}
+.update-icon{font-size:35px;color:#168fff}
+.update-item p{color:#91a4bd;font-size:13px;margin-top:6px}
+.version{margin-left:auto;color:#36c6ff;border:1px solid #168fff;border-radius:9px;padding:9px 13px;white-space:nowrap}
+
+@media(max-width:850px){
+.sidebar{width:185px;min-width:185px;padding:18px 9px}
+.logo h1{font-size:48px}
+.game-art{width:150px;min-width:150px}
+.play{min-width:100px}
 }
-
-body {
-  background: #070a10;
-  color: white;
-  font-family: Arial, sans-serif;
-  min-height: 100vh;
-}
-
-.app {
-  display: flex;
-  min-height: 100vh;
-}
-
-/* SOL MENÜ */
-
-.sidebar {
-  width: 260px;
-  min-width: 260px;
-  background: #090d15;
-  border-right: 1px solid #1b2638;
-  padding: 25px 15px;
-  display: flex;
-  flex-direction: column;
-}
-
-.logo {
-  text-align: center;
-  margin-bottom: 45px;
-}
-
-.logo h1 {
-  font-size: 65px;
-  font-weight: 900;
-  font-style: italic;
-  color: #168fff;
-  text-shadow: 0 0 20px #087cff;
-  letter-spacing: 4px;
-}
-
-.logo p {
-  font-size: 12px;
-  letter-spacing: 4px;
-  color: #c5d9f5;
-  margin-top: 5px;
-}
-
-.menu {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-}
-
-.menu button {
-  padding: 17px 15px;
-  text-align: left;
-  border: none;
-  color: #aab8cc;
-  background: transparent;
-  border-radius: 9px;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-.menu button:hover,
-.menu button.active {
-  color: white;
-  background: linear-gradient(90deg,#0755b7,#10294c);
-  box-shadow: 0 0 15px #006eff33;
-}
-
-.menu button.active {
-  border-left: 4px solid #16c8ff;
-}
-
-.sidebar-bottom {
-  margin-top: auto;
-  padding: 22px 10px;
-  text-align: center;
-  border: 1px solid #087cff;
-  border-radius: 12px;
-  background: radial-gradient(circle,#102c51,#080d17);
-  color: #83caff;
-  line-height: 1.6;
-}
-
-/* ANA ALAN */
-
-.main {
-  flex: 1;
-  min-width: 0;
-  padding: 20px;
-}
-
-.topbar {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.search {
-  flex: 1;
-  padding: 14px 18px;
-  background: #101722;
-  border: 1px solid #26354b;
-  border-radius: 30px;
-  color: white;
-  outline: none;
-  font-size: 15px;
-}
-
-.search:focus {
-  border-color: #168fff;
-}
-
-.settings {
-  background: transparent;
-  color: #aab8cc;
-  border: none;
-  font-size: 23px;
-  cursor: pointer;
-}
-
-/* BANNER */
-
-.banner {
-  min-height: 220px;
-  border: 1px solid #164d91;
-  border-radius: 17px;
-  background:
-    radial-gradient(ellipse at 80% 50%,#0758a9 0%,transparent 45%),
-    linear-gradient(110deg,#071426,#101f3b,#030914);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 35px;
-  overflow: hidden;
-  position: relative;
-  margin-bottom: 28px;
-}
-
-.banner:after {
-  content: "🎮";
-  position: absolute;
-  right: 35px;
-  font-size: 115px;
-  opacity: .8;
-  filter: drop-shadow(0 0 20px #008cff);
-}
-
-.banner-content {
-  position: relative;
-  z-index: 2;
-}
-
-.banner h2 {
-  font-size: 54px;
-  font-style: italic;
-  letter-spacing: 5px;
-  text-shadow: 0 0 20px #168fff;
-}
-
-.banner h3 {
-  font-size: 13px;
-  letter-spacing: 7px;
-  color: #9bcfff;
-  margin-bottom: 15px;
-}
-
-.banner p {
-  color: #c4d6ee;
-}
-
-/* OYUNLAR */
-
-.section-title {
-  font-size: 23px;
-  margin-bottom: 17px;
-  border-left: 4px solid #12bfff;
-  padding-left: 13px;
-}
-
-.game-card {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  padding: 12px;
-  margin-bottom: 17px;
-  background: linear-gradient(110deg,#111a29,#0b101a);
-  border: 1px solid #25344b;
-  border-radius: 15px;
-  transition: .2s;
-}
-
-.game-card:hover {
-  border-color: #087cff;
-  box-shadow: 0 0 18px #087cff22;
-  transform: translateY(-2px);
-}
-
-.game-art {
-  width: 250px;
-  min-width: 250px;
-  height: 135px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-}
-
-.saber-art {
-  background:
-    radial-gradient(circle at 50% 50%,#4c143b,#11172d 65%,#060b17);
-}
-
-.saber-art span {
-  font-size: 65px;
-  filter: drop-shadow(0 0 15px #168fff);
-}
-
-.second-art {
-  background: linear-gradient(120deg,#063e48,#09233a,#07111c);
-}
-
-.second-art span {
-  font-size: 65px;
-  filter: drop-shadow(0 0 15px #00bfff);
-}
-
-.game-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.game-info h3 {
-  font-size: 23px;
-  margin-bottom: 9px;
-}
-
-.game-info p {
-  color: #a6b7cc;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.tags {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
-  flex-wrap: wrap;
-}
-
-.tags span {
-  padding: 6px 12px;
-  background: #142b43;
-  color: #83caff;
-  border-radius: 20px;
-  font-size: 12px;
-}
-
-.play {
-  min-width: 145px;
-  padding: 17px;
-  border: 1px solid #27bfff;
-  border-radius: 11px;
-  color: white;
-  background: linear-gradient(135deg,#087cff,#0045a9);
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 0 18px #007bff55;
-}
-
-.play:hover {
-  background: #168fff;
-  box-shadow: 0 0 25px #168fff99;
-}
-
-/* GÜNCELLEMELER */
-
-.updates {
-  margin-top: 25px;
-  border: 1px solid #273d5b;
-  border-radius: 14px;
-  overflow: hidden;
-  background: #0c121e;
-}
-
-.updates-title {
-  padding: 17px;
-  border-bottom: 1px solid #273d5b;
-  font-size: 17px;
-}
-
-.update-item {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  gap: 17px;
-}
-
-.update-icon {
-  font-size: 35px;
-  color: #168fff;
-}
-
-.update-item p {
-  color: #91a4bd;
-  font-size: 13px;
-  margin-top: 6px;
-}
-
-.version {
-  margin-left: auto;
-  color: #36c6ff;
-  border: 1px solid #168fff;
-  border-radius: 9px;
-  padding: 9px 13px;
-  white-space: nowrap;
-}
-
-/* MOBİL */
-
-@media(max-width:850px) {
-  .sidebar {
-    width: 185px;
-    min-width: 185px;
-    padding: 18px 9px;
-  }
-
-  .logo h1 {
-    font-size: 48px;
-  }
-
-  .game-art {
-    width: 150px;
-    min-width: 150px;
-  }
-
-  .play {
-    min-width: 100px;
-  }
-}
-
-@media(max-width:600px) {
-  .app {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    min-width: 0;
-    padding: 12px;
-    border-right: none;
-    border-bottom: 1px solid #26354b;
-  }
-
-  .logo {
-    margin-bottom: 12px;
-  }
-
-  .logo h1 {
-    font-size: 39px;
-  }
-
-  .logo p {
-    font-size: 10px;
-  }
-
-  .menu {
-    flex-direction: row;
-    overflow-x: auto;
-    gap: 5px;
-  }
-
-  .menu button {
-    white-space: nowrap;
-    padding: 12px;
-    font-size: 12px;
-  }
-
-  .sidebar-bottom {
-    display: none;
-  }
-
-  .main {
-    padding: 13px;
-  }
-
-  .banner {
-    min-height: 155px;
-    padding: 20px;
-  }
-
-  .banner h2 {
-    font-size: 36px;
-  }
-
-  .banner h3 {
-    font-size: 10px;
-    letter-spacing: 4px;
-  }
-
-  .banner:after {
-    font-size: 65px;
-    right: 10px;
-  }
-
-  .game-card {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .game-art {
-    width: 100%;
-    min-width: 0;
-    height: 145px;
-  }
-
-  .game-info {
-    width: 100%;
-    flex: 1 1 100%;
-    padding: 5px;
-  }
-
-  .play {
-    width: 100%;
-  }
-
-  .update-item {
-    flex-wrap: wrap;
-  }
-
-  .version {
-    margin-left: 0;
-  }
+@media(max-width:600px){
+.app{flex-direction:column}
+.sidebar{width:100%;min-width:0;padding:12px;border-right:none;border-bottom:1px solid #26354b}
+.logo{margin-bottom:12px}
+.logo h1{font-size:39px}
+.logo p{font-size:10px}
+.menu{flex-direction:row;overflow-x:auto;gap:5px}
+.menu button{white-space:nowrap;padding:12px;font-size:12px}
+.sidebar-bottom{display:none}
+.main{padding:13px}
+.banner{min-height:155px;padding:20px}
+.banner h2{font-size:36px}
+.banner h3{font-size:10px;letter-spacing:4px}
+.banner:after{font-size:65px;right:10px}
+.game-card{flex-wrap:wrap;gap:12px}
+.game-art{width:100%;min-width:0;height:145px}
+.game-info{width:100%;flex:1 1 100%;padding:5px}
+.play{width:100%}
+.update-item{flex-wrap:wrap}
+.version{margin-left:0}
 }
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
-  <aside class="sidebar">
+<aside class="sidebar">
+  <div class="logo">
+    <h1>DD</h1>
+    <p>OYUN MAĞAZASI</p>
+  </div>
 
-    <div class="logo">
-      <h1>DD</h1>
-      <p>OYUN MAĞAZASI</p>
+  <nav class="menu">
+    <button class="active" onclick="showSection('home',this)">⌂　Ana Sayfa</button>
+    <button onclick="showSection('home',this)">🎮　Oyunlar</button>
+    <button onclick="showSection('updates',this)">⬇　Güncellemeler</button>
+    <button onclick="showSection('settings',this)">⚙　Ayarlar</button>
+    <button onclick="showSection('about',this)">ⓘ　Hakkında</button>
+  </nav>
+
+  <div class="sidebar-bottom">
+    🎮<br><b>DD</b><br>Tüm oyunlar<br>tek bir yerde!
+  </div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <input class="search" id="search" placeholder="⌕ Oyun ara..." oninput="searchGames()">
+    <button class="settings" onclick="showSection('settings')">⚙</button>
+  </div>
+
+  <section id="home">
+    <div class="banner">
+      <div class="banner-content">
+        <h2>DD</h2>
+        <h3>OYUN MAĞAZASI</h3>
+        <p>Oyun dünyana hoş geldin!</p>
+      </div>
     </div>
 
-    <nav class="menu">
-      <button class="active" onclick="showSection('home',this)">⌂　Ana Sayfa</button>
-      <button onclick="showSection('games',this)">🎮　Oyunlar</button>
-      <button onclick="showSection('updates',this)">⬇　Güncellemeler</button>
-      <button onclick="showSection('settings',this)">⚙　Ayarlar</button>
-      <button onclick="showSection('about',this)">ⓘ　Hakkında</button>
-    </nav>
+    <h2 class="section-title">🎮 Oyun Kütüphanesi</h2>
 
-    <div class="sidebar-bottom">
-      🎮<br>
-      <b>DD</b><br>
-      Tüm oyunlar<br>tek bir yerde!
+    <div class="game-card" data-name="saber x ışın kılıcı">
+      <div class="game-art saber-art">
+        <img src="images/saber-x.png" alt="SABER X">
+      </div>
+      <div class="game-info">
+        <h3>SABER X</h3>
+        <p>Işın kılıçlarını kuşan, maceraya başla!</p>
+        <div class="tags">
+          <span>Aksiyon</span><span>Macera</span><span>3D</span>
+        </div>
+      </div>
+      <button class="play" onclick="openGame('saber-x')">▶ Oyna</button>
     </div>
 
-  </aside>
-
-  <main class="main">
-
-    <div class="topbar">
-      <input
-        class="search"
-        id="search"
-        placeholder="⌕  Oyun ara..."
-        oninput="searchGames()">
-      <button class="settings" onclick="showSection('settings')">⚙</button>
+    <div class="game-card" data-name="futbol mini futbol 3d">
+      <div class="game-art second-art">
+        <img src="images/futbol.png" alt="FUTBOL">
+      </div>
+      <div class="game-info">
+        <h3>FUTBOL</h3>
+        <p>Sahaya çık, takımını zafere taşı!</p>
+        <div class="tags">
+          <span>Spor</span><span>Futbol</span><span>3D</span>
+        </div>
+      </div>
+      <button class="play" onclick="openGame('futbol')">▶ Oyna</button>
     </div>
+  </section>
 
-    <section id="home">
+  <section id="updates" style="display:none">
+    <h2 class="section-title">⬇ Güncellemeler</h2>
+    <div class="updates">
+      <div class="updates-title">Oyun Güncellemeleri</div>
+      <div class="update-item">
+        <div class="update-icon">🔄</div>
+        <div>
+          <b>DD mağazasına hoş geldin!</b>
+          <p>Yeni oyunlar ve güncellemeler burada yayınlanacak.</p>
+        </div>
+        <span class="version">v1.0.0</span>
+      </div>
+    </div>
+  </section>
 
-      <div class="banner">
-        <div class="banner-content">
-          <h2>DD</h2>
-          <h3>OYUN MAĞAZASI</h3>
-          <p>Oyun dünyana hoş geldin!</p>
+  <section id="settings" style="display:none">
+    <h2 class="section-title">⚙ Ayarlar</h2>
+    <div class="updates">
+      <div class="update-item">
+        <div>
+          <b>DD Oyun Mağazası</b>
+          <p>Mağaza ayarları sonraki sürümlerde eklenecek.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <h2 class="section-title">🎮 Oyun Kütüphanesi</h2>
-
-      <div class="game-card" data-name="saber x ışın kılıcı">
-        <div class="game-art saber-art">
-          <span>⚔️</span>
-        </div>
-
-        <div class="game-info">
-          <h3>SABER X</h3>
-          <p>Işın kılıçlarını kuşan, maceraya başla!</p>
-          <div class="tags">
-            <span>Aksiyon</span>
-            <span>Macera</span>
-            <span>3D</span>
-          </div>
-        </div>
-
-        <button class="play" onclick="openGame('saber-x')">
-          ▶ Oyna
-        </button>
-      </div>
-
-      <div class="game-card" data-name="ikinci oyun futbol">
-        <div class="game-art second-art">
-          <span>⚽</span>
-        </div>
-
-        <div class="game-info">
-          <h3>İKİNCİ OYUN</h3>
-          <p>Yeni maceran seni bekliyor!</p>
-          <div class="tags">
-            <span>Oyun</span>
-            <span>3D</span>
-            <span>Eğlence</span>
-          </div>
-        </div>
-
-        <button class="play" onclick="openGame('oyun-2')">
-          ▶ Oyna
-        </button>
-      </div>
-
-    </section>
-
-    <section id="updates" style="display:none">
-      <h2 class="section-title">⬇ Güncellemeler</h2>
-      <div class="updates">
-        <div class="updates-title">Oyun Güncellemeleri</div>
-        <div class="update-item">
-          <div class="update-icon">🔄</div>
-          <div>
-            <b>DD mağazasına hoş geldin!</b>
-            <p>Yeni oyunlar ve güncellemeler burada yayınlanacak.</p>
-          </div>
-          <span class="version">v1.0.0</span>
+  <section id="about" style="display:none">
+    <h2 class="section-title">ⓘ Hakkında</h2>
+    <div class="updates">
+      <div class="update-item">
+        <div>
+          <b>DD GAME STORE</b>
+          <p>Oyunlarımızı tek bir uygulamada buluşturuyoruz.</p>
+          <p>Sürüm: 1.0.0</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="settings" style="display:none">
-      <h2 class="section-title">⚙ Ayarlar</h2>
-      <div class="updates">
-        <div class="update-item">
-          <div>
-            <b>DD Oyun Mağazası</b>
-            <p>Mağaza ayarları sonraki sürümlerde eklenecek.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" style="display:none">
-      <h2 class="section-title">ⓘ Hakkında</h2>
-      <div class="updates">
-        <div class="update-item">
-          <div>
-            <b>DD GAME STORE</b>
-            <p>Oyunlarımızı tek bir uygulamada buluşturuyoruz.</p>
-            <p>Sürüm: 1.0.0</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer style="text-align:center;color:#64748b;padding:30px 5px;font-size:12px">
-      DD GAME STORE © 2026
-    </footer>
-
-  </main>
-
+  <footer style="text-align:center;color:#64748b;padding:30px 5px;font-size:12px">
+    DD GAME STORE © 2026
+  </footer>
+</main>
 </div>
 
 <script>
-
-// Oyun dosyalarının konumları
 const games = {
   "saber-x": "games/saber-x/index.html",
-  "oyun-2": "games/oyun-2/index.html"
+  "futbol": "games/futbol/index.html"
 };
 
-// Oyun açma
 function openGame(game) {
   const path = games[game];
-
-  if (path) {
-    window.location.href = path;
-  }
+  if (path) window.location.href = path;
 }
 
-// Menü geçişleri
 function showSection(section, button) {
   document.querySelectorAll("main section").forEach(s => {
     s.style.display = "none";
   });
 
   const target = document.getElementById(section);
-
   if (target) target.style.display = "block";
 
   document.querySelectorAll(".menu button").forEach(b => {
@@ -629,20 +222,16 @@ function showSection(section, button) {
   if (button) button.classList.add("active");
 }
 
-// Oyun arama
 function searchGames() {
   const value = document.getElementById("search").value.toLowerCase();
 
   document.querySelectorAll(".game-card").forEach(card => {
     card.style.display =
-      card.dataset.name.toLowerCase().includes(value)
-      ? "flex" : "none";
+      card.dataset.name.toLowerCase().includes(value) ? "flex" : "none";
   });
 
   showSection("home");
 }
-
 </script>
-
 </body>
 </html>
